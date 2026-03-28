@@ -15,6 +15,9 @@ export class MainPage {
         hideCountertopText: (page) => page.getByTestId('hide-countertop').getByText('Скрыть столешницу'),
 
         showCountertopArea: (page) => page.getByTestId('show-main'),
+
+        chooseUShapedCountertopButton: (page) => page.getByTestId('countertop-type-u'),
+        uShapedCountertopLines: (page) => page.locator('.line[class*="c-U"]'),
     } satisfies LocatorsMapping
 
     locators: LocatorsDictionary<(typeof MainPage)['LOCATORS_MAPPING']>
