@@ -25,8 +25,10 @@ export class AuthPage {
     }
 
     async logIn() {
+        await this.openPage()
+
         await this.locators.loginField.fill(this.login)
-        await this.locators.loginButton.fill(this.password)
+        await this.locators.passwordField.fill(this.password)
         await this.locators.loginButton.click()
     }
 }
