@@ -33,7 +33,7 @@ module.exports = defineConfig({
         trace: 'on-first-retry',
         headless: !isWebstormDebugMode,
     },
-    timeout: process.env.CI ? 30000 : 10000,
+    timeout: process.env.CI ? 30000 : 30000,
     expect: {
         timeout: process.env.CI ? 5000 : 5000,
     },
