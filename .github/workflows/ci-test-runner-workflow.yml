@@ -2,7 +2,7 @@ name: PW tests
 
 run-name: ${{ github.actor }} is running autotests 🚀
 
-on: [push, workflow_dispatch]
+on: [workflow_dispatch]
 
 jobs:
   run-tests:
