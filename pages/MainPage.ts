@@ -9,6 +9,12 @@ export class MainPage {
         logOutButton: (page) => page.getByRole('button', { name: 'Выйти' }),
 
         pageHeading: (page) => page.getByRole('heading', { name: 'Калькулятор столешниц' }),
+
+        hideCountertopArea: (page) => page.getByTestId('hide-countertop'),
+        hideCountertopToggle: (page) => page.getByTestId('hide-countertop').getByAltText('toggle'),
+        hideCountertopText: (page) => page.getByTestId('hide-countertop').getByText('Скрыть столешницу'),
+
+        showCountertopArea: (page) => page.getByTestId('show-main'),
     } satisfies LocatorsMapping
 
     locators: LocatorsDictionary<(typeof MainPage)['LOCATORS_MAPPING']>
