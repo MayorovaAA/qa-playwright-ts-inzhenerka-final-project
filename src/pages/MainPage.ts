@@ -17,7 +17,31 @@ export class MainPage {
         showCountertopArea: (page) => page.getByTestId('show-main'),
 
         chooseUShapedCountertopButton: (page) => page.getByTestId('countertop-type-u'),
-        uShapedCountertopLines: (page) => page.locator('.line[class*="c-U"]'),
+        uShapedCountertopLines: '.line[class*="c-U"]',
+
+        countertopThicknessSelector: (page) =>
+            page.locator('div:is([class^="style_layer"], [class*=" style_layer"])').getByTestId('select-thickness'),
+
+        countertopThicknessFour: '[class*="styles_options"]',
+
+        skirtingButton: (page) =>
+            page.getByTestId('top-button').filter({ has: page.getByText('Плинтус', { exact: true }) }),
+
+        islandButton: (page) =>
+            page.getByTestId('product-item').filter({ has: page.getByText('Остров', { exact: true }) }),
+
+        waterDrainageGrooves: (page) =>
+            page
+                .getByTestId('options-item')
+                .filter({ has: page.getByText('Проточки для стока воды', { exact: true }) }),
+
+        searchField: (page) => page.getByTestId('search'),
+
+        colourN103: (page) =>
+            page.getByTestId('stone-block').filter({ has: page.getByText('N-103 Gray Onix', { exact: true }) }),
+
+        calcPriceButton: (page) => page.getByTestId('calc-button'),
+        openCalculationButton: (page) => page.getByTestId('open-report-button'),
     } satisfies LocatorsMapping
 
     locators: LocatorsDictionary<(typeof MainPage)['LOCATORS_MAPPING']>
