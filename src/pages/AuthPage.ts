@@ -11,12 +11,12 @@ export class AuthPage {
     } satisfies LocatorsMapping
 
     locators: LocatorsDictionary<(typeof AuthPage)['LOCATORS_MAPPING']>
+    private readonly login: string
+    private readonly password: string
 
-    constructor(
-        private page: Page,
-        private login: string = 'tester@inzhenerka.tech',
-        private password: string = 'LetsTest!',
-    ) {
+    constructor(private page: Page) {
+        this.login = 'tester@inzhenerka.tech'
+        this.password = 'LetsTest!'
         this.locators = locatorsCreator(page, AuthPage.LOCATORS_MAPPING)
     }
 
