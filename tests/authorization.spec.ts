@@ -1,14 +1,18 @@
 import { expect, test } from '@playwright/test'
-import { step } from 'allure-js-commons'
+import { feature, step } from 'allure-js-commons'
 
-import { AuthPage } from '../pages/AuthPage'
-import { MainPage } from '../pages/MainPage'
+import { AuthPage } from '../src/pages/AuthPage'
+import { MainPage } from '../src/pages/MainPage'
 
 const login = 'tester@inzhenerka.tech'
 const password = 'LetsTest!'
 
 let authPage: AuthPage
 let mainPage: MainPage
+
+test.beforeAll(async () => {
+    await feature('Авторизация')
+})
 
 test.describe('Authorization. Positive tests', async () => {
     test.beforeEach(async ({ page }) => {

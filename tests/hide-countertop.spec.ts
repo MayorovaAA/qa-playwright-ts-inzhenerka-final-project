@@ -1,11 +1,15 @@
 import { expect, test } from '@playwright/test'
-import { step } from 'allure-js-commons'
+import { feature, step } from 'allure-js-commons'
 
-import { AuthPage } from '../pages/AuthPage'
-import { MainPage } from '../pages/MainPage'
+import { AuthPage } from '../src/pages/AuthPage'
+import { MainPage } from '../src/pages/MainPage'
 
 let authPage: AuthPage
 let mainPage: MainPage
+
+test.beforeAll(async () => {
+    await feature('Скрытие столешницы')
+})
 
 test.describe('Hide Countertop', async () => {
     test.beforeEach(async ({ page }) => {

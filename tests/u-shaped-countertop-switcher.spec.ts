@@ -1,11 +1,15 @@
 import { expect, test } from '@playwright/test'
-import { step } from 'allure-js-commons'
+import { feature, step } from 'allure-js-commons'
 
-import { AuthPage } from '../pages/AuthPage'
-import { MainPage } from '../pages/MainPage'
+import { AuthPage } from '../src/pages/AuthPage'
+import { MainPage } from '../src/pages/MainPage'
 
 let authPage: AuthPage
 let mainPage: MainPage
+
+test.beforeAll(async () => {
+    await feature('Переключение на П-образную столешницу и ее отображение')
+})
 
 test.describe('Ability to choose U-shaped countertop', async () => {
     test.beforeEach(async ({ page }) => {
