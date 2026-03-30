@@ -1,8 +1,9 @@
-import { expect, test } from '@playwright/test'
+import { expect } from '@playwright/test'
 import { feature, step } from 'allure-js-commons'
 
 import { AuthPage } from '../src/pages/AuthPage'
 import { MainPage } from '../src/pages/MainPage'
+import { test } from '../src/fixtures/test-fixture'
 
 let authPage: AuthPage
 let mainPage: MainPage
@@ -12,8 +13,8 @@ test.beforeAll(async () => {
 })
 
 test.describe('Ability to choose U-shaped countertop', async () => {
-    test.beforeEach(async ({ page }) => {
-        authPage = new AuthPage(page)
+    test.beforeEach(async ({ page, env }) => {
+        authPage = new AuthPage(page, env)
         mainPage = new MainPage(page)
 
         await step('Log in', async () => {

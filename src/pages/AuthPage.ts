@@ -1,6 +1,6 @@
 import { Page } from '@playwright/test'
 
-import { LocatorsDictionary, LocatorsMapping } from '../types/types'
+import { LocatorsDictionary, LocatorsMapping, TestEnv } from '../types/types'
 import { locatorsCreator } from './pages-utils/locators-creator'
 
 export class AuthPage {
@@ -14,9 +14,12 @@ export class AuthPage {
     private readonly login: string
     private readonly password: string
 
-    constructor(private page: Page) {
-        this.login = 'tester@inzhenerka.tech'
-        this.password = 'LetsTest!'
+    constructor(
+        private page: Page,
+        private env: TestEnv,
+    ) {
+        this.login = this.env.login
+        this.password = this.env.password
         this.locators = locatorsCreator(page, AuthPage.LOCATORS_MAPPING)
     }
 

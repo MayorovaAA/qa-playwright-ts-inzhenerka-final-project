@@ -1,9 +1,10 @@
-import { expect, Page, test } from '@playwright/test'
+import { expect, Page } from '@playwright/test'
 import { epic, step } from 'allure-js-commons'
 
 import { AuthPage } from '../src/pages/AuthPage'
 import { MainPage } from '../src/pages/MainPage'
 import { CalcResultPage } from '../src/pages/CalcResultPage'
+import { test } from '../src/fixtures/test-fixture'
 
 let authPage: AuthPage
 let mainPage: MainPage
@@ -16,8 +17,8 @@ test.beforeAll(async () => {
 })
 
 test.describe('e2e ability to assemble the order', async () => {
-    test.beforeEach(async ({ page }) => {
-        authPage = new AuthPage(page)
+    test.beforeEach(async ({ page, env }) => {
+        authPage = new AuthPage(page, env)
         mainPage = new MainPage(page)
 
         await step('Log in', async () => {
