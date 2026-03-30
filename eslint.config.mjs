@@ -35,7 +35,7 @@ export default defineConfig(
             'import/no-named-as-default': 'off',
             'import/no-named-as-default-member': 'off',
             'import/no-unresolved': ['off'],
-            "import/named": 'off',
+            'import/named': 'off',
             'no-console': ['warn', { allow: ['time', 'timeEnd', 'info', 'warn', 'error'] }],
         },
     },

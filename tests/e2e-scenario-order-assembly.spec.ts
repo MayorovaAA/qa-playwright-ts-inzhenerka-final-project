@@ -1,11 +1,10 @@
-import { expect, Page, test } from '@playwright/test'
+import { expect, Page } from '@playwright/test'
 import { epic, step } from 'allure-js-commons'
 
-import { AuthPage } from '../src/pages/AuthPage'
+import { test } from '../src/fixtures/test-fixture'
 import { MainPage } from '../src/pages/MainPage'
 import { CalcResultPage } from '../src/pages/CalcResultPage'
 
-let authPage: AuthPage
 let mainPage: MainPage
 let calcResultPage: CalcResultPage
 
@@ -16,20 +15,19 @@ test.beforeAll(async () => {
 })
 
 test.describe('e2e ability to assemble the order', async () => {
-    test.beforeEach(async ({ page }) => {
-        authPage = new AuthPage(page)
-        mainPage = new MainPage(page)
+    test.beforeEach(async ({ authedPage }) => {
+        mainPage = new MainPage(authedPage)
 
-        await step('Log in', async () => {
-            await authPage.logIn()
+        await step('Go to Page', async () => {
+            await authedPage.goto('/')
         })
     })
 
-    test('Order assembly', async ({ page }) => {
+    test('Order assembly', async ({ authedPage }) => {
         await step('Click "U-shaped" button', async () => {
             await mainPage.locators.chooseUShapedCountertopButton.click()
 
-            await page.waitForLoadState('domcontentloaded')
+            await authedPage.waitForLoadState('domcontentloaded')
         })
 
         await step('Choose thickness 4', async () => {
@@ -51,7 +49,9 @@ test.describe('e2e ability to assemble the order', async () => {
 
         await step('Choose "N-103 Gray Onix" color', async () => {
             await mainPage.locators.searchField.fill('N-103 Gray Onix', {})
-            await page.waitForLoadState('domcontentloaded')
+
+            await authedPage.waitForLoadState('domcontentloaded')
+
             await mainPage.locators.colourN103.click()
         })
 
@@ -61,9 +61,10 @@ test.describe('e2e ability to assemble the order', async () => {
 
         await step('Click "Calculation" button', async () => {
             ;[newPage] = await Promise.all([
-                page.context().waitForEvent('page'),
+                authedPage.context().waitForEvent('page'),
                 await mainPage.locators.openCalculationButton.click(),
             ])
+
             await newPage.waitForURL('https://report.topklik.online/calculation**')
 
             calcResultPage = new CalcResultPage(newPage)
