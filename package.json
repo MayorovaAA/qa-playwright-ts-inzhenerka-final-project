@@ -2,9 +2,14 @@
     "name": "qa-playwright-ts-inzhenerka-final-project",
     "author": "Anastasia Mayorova",
     "version": "1.0.0",
+    "engines": {
+        "node": ">=22",
+        "yarn": ">=1"
+    },
     "scripts": {
         "test": "playwright test",
-        "test-ui": "playwright test --ui"
+        "test-ui": "playwright test --ui",
+        "postinstall": "yarn playwright install"
     },
     "license": "ISC",
     "devDependencies": {
@@ -20,7 +25,6 @@
         "eslint-plugin-import": "^2.31.0",
         "eslint-plugin-prettier": "^5.5.4",
         "globals": "^15.14.0",
-        "playwright": "^1.58.2",
         "prettier": "^3.4.2",
         "typescript": "^5.9.3",
         "typescript-eslint": "^8.50.0"
