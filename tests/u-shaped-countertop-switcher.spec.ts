@@ -1,11 +1,9 @@
 import { expect } from '@playwright/test'
 import { feature, step } from 'allure-js-commons'
 
-import { AuthPage } from '../src/pages/AuthPage'
-import { MainPage } from '../src/pages/MainPage'
 import { test } from '../src/fixtures/test-fixture'
+import { MainPage } from '../src/pages/MainPage'
 
-let authPage: AuthPage
 let mainPage: MainPage
 
 test.beforeAll(async () => {
@@ -13,20 +11,19 @@ test.beforeAll(async () => {
 })
 
 test.describe('Ability to choose U-shaped countertop', async () => {
-    test.beforeEach(async ({ page, env }) => {
-        authPage = new AuthPage(page, env)
-        mainPage = new MainPage(page)
+    test.beforeEach(async ({ authedPage }) => {
+        mainPage = new MainPage(authedPage)
 
-        await step('Log in', async () => {
-            await authPage.logIn()
+        await step('Go to Page', async () => {
+            await authedPage.goto('/')
         })
     })
 
-    test('Check switch to U-shaped countertop', async ({ page }) => {
+    test('Check switch to U-shaped countertop', async ({ authedPage }) => {
         await step('Click "U-shaped" button', async () => {
             await mainPage.locators.chooseUShapedCountertopButton.click()
 
-            await page.waitForLoadState('domcontentloaded')
+            await authedPage.waitForLoadState('domcontentloaded')
         })
 
         await step('Ensure U-shaped countertop is chosen', async () => {

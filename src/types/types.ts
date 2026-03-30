@@ -1,10 +1,8 @@
-import { type BrowserContext, Locator, Page } from '@playwright/test'
+import { Locator, Page } from '@playwright/test'
 
 export type LocatorsMapping = Record<string, string | ((page: Page) => Locator)>
 
 export type LocatorsDictionary<T extends LocatorsMapping> = Record<keyof T, Locator>
-
-export type StorageState = Awaited<ReturnType<BrowserContext['storageState']>>
 
 export type TestEnv = {
     baseURL: string
@@ -12,8 +10,6 @@ export type TestEnv = {
     password: string
 }
 
-export type AuthFixture = {
-    authState: StorageState
+export type AuthWorkerFixture = {
     authedPage: Page
-    baseUrl: string
 }

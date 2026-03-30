@@ -1,6 +1,6 @@
 import { TestEnv } from '../../types/types'
 
-function validateEnv(): TestEnv {
+export function validateEnv(): TestEnv {
     const errors: string[] = []
     if (!process.env.BASE_URL) errors.push('You must provide a BASE_URL first')
     if (!process.env.LOGIN) errors.push('You must provide a LOGIN first')
@@ -15,5 +15,3 @@ function validateEnv(): TestEnv {
         password: process.env.PASSWORD,
     } as TestEnv
 }
-
-export const env = validateEnv()

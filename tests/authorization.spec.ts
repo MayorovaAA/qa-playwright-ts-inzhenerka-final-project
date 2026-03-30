@@ -1,9 +1,9 @@
 import { expect } from '@playwright/test'
 import { feature, step } from 'allure-js-commons'
 
+import { test } from '../src/fixtures/test-fixture'
 import { AuthPage } from '../src/pages/AuthPage'
 import { MainPage } from '../src/pages/MainPage'
-import { test } from '../src/fixtures/test-fixture'
 
 let authPage: AuthPage
 let mainPage: MainPage
@@ -22,13 +22,13 @@ test.describe('Authorization. Positive tests', async () => {
         })
     })
 
-    test('Successful Authorization', async ({ env }) => {
+    test('Successful Authorization', async () => {
         await step('Fill login', async () => {
-            await authPage.locators.loginField.fill(env.login)
+            await authPage.locators.loginField.fill(authPage.login)
         })
 
         await step('Fill password', async () => {
-            await authPage.locators.passwordField.fill(env.password)
+            await authPage.locators.passwordField.fill(authPage.password)
         })
 
         await step('Click [Log in]', async () => {
@@ -53,13 +53,13 @@ test.describe('Authorization. Negative tests', async () => {
         })
     })
 
-    test('Wrong login', async ({ page, env }) => {
+    test('Wrong login', async ({ page }) => {
         await step('Fill wrong login', async () => {
             await authPage.locators.loginField.fill('lolo@kek.com')
         })
 
         await step('Fill password', async () => {
-            await authPage.locators.passwordField.fill(env.password)
+            await authPage.locators.passwordField.fill(authPage.password)
         })
 
         await step('Click [Log in]', async () => {
@@ -73,9 +73,9 @@ test.describe('Authorization. Negative tests', async () => {
         })
     })
 
-    test('Wrong password', async ({ page, env }) => {
+    test('Wrong password', async ({ page }) => {
         await step('Fill  login', async () => {
-            await authPage.locators.loginField.fill(env.login)
+            await authPage.locators.loginField.fill(authPage.login)
         })
 
         await step('Fill wrong password', async () => {
@@ -93,13 +93,13 @@ test.describe('Authorization. Negative tests', async () => {
         })
     })
 
-    test('Empty login', async ({ page, env }) => {
+    test('Empty login', async ({ page }) => {
         await step('Fill empty login', async () => {
             await authPage.locators.loginField.fill('')
         })
 
         await step('Fill password', async () => {
-            await authPage.locators.passwordField.fill(env.password)
+            await authPage.locators.passwordField.fill(authPage.password)
         })
 
         await step('Click [Log in]', async () => {
@@ -118,9 +118,9 @@ test.describe('Authorization. Negative tests', async () => {
         })
     })
 
-    test('Empty password', async ({ page, env }) => {
+    test('Empty password', async ({ page }) => {
         await step('Fill  login', async () => {
-            await authPage.locators.loginField.fill(env.login)
+            await authPage.locators.loginField.fill(authPage.login)
         })
 
         await step('Fill empty password', async () => {

@@ -11,8 +11,8 @@ export class AuthPage {
     } satisfies LocatorsMapping
 
     locators: LocatorsDictionary<(typeof AuthPage)['LOCATORS_MAPPING']>
-    private readonly login: string
-    private readonly password: string
+    login: string
+    password: string
 
     constructor(
         private page: Page,
@@ -25,13 +25,5 @@ export class AuthPage {
 
     async openPage() {
         await this.page.goto('/')
-    }
-
-    async logIn() {
-        await this.openPage()
-
-        await this.locators.loginField.fill(this.login)
-        await this.locators.passwordField.fill(this.password)
-        await this.locators.loginButton.click()
     }
 }
