@@ -42,6 +42,7 @@ export class MainPage {
 
         calcPriceButton: (page) => page.getByTestId('calc-button'),
         openCalculationButton: (page) => page.getByTestId('open-report-button'),
+        preliminaryPrice: (page) => page.getByTestId('price-button'),
     } satisfies LocatorsMapping
 
     locators: LocatorsDictionary<(typeof MainPage)['LOCATORS_MAPPING']>

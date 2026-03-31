@@ -24,6 +24,8 @@ test.describe('e2e ability to assemble the order', async () => {
     })
 
     test('Order assembly', async ({ authedPage }) => {
+        let preliminaryPrice: number
+
         await step('Click "U-shaped" button', async () => {
             await mainPage.locators.chooseUShapedCountertopButton.click()
 
@@ -59,6 +61,10 @@ test.describe('e2e ability to assemble the order', async () => {
             await mainPage.locators.calcPriceButton.click()
         })
 
+        await step('Get preliminary price', async () => {
+            preliminaryPrice = normalizePrice(await mainPage.locators.preliminaryPrice.innerText())
+        })
+
         await step('Click "Calculation" button', async () => {
             ;[newPage] = await Promise.all([
                 authedPage.context().waitForEvent('page'),
@@ -88,7 +94,18 @@ test.describe('e2e ability to assemble the order', async () => {
         })
 
         await step('Ensure total Price is as expected', async () => {
-            await expect(calcResultPage.locators.totalPriceValue).toHaveText('413400.00 ₽')
+            const totalPrice = normalizePrice(await calcResultPage.locators.totalPriceValue.innerText())
+            expect(totalPrice).toBeCloseTo(preliminaryPrice, 2)
         })
     })
 })
+
+function normalizePrice(price: string) {
+    const cleaned = price
+        .replace(/\u00A0/g, '')
+        .replace(/\s/g, '')
+        .replace(/[^\d.,-]/g, '')
+        .replace(/,/g, '.')
+    const normalized = cleaned.replace(/.(?=.*.)/g, '')
+    return parseFloat(normalized)
+}

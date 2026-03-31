@@ -21,7 +21,7 @@ export const test = base
                 const ctx = await browser.newContext()
                 const page = await ctx.newPage()
 
-                await page.goto(env.baseURL)
+                await page.goto(env.baseURL, {})
 
                 const state = await ctx.storageState()
                 state.origins

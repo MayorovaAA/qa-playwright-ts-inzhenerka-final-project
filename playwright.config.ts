@@ -5,12 +5,6 @@ import { defineConfig, devices } from '@playwright/test'
 const isWebstormDebugMode = Boolean(process.env.NODE_OPTIONS && /webstorm.+debugger/i.test(process.env.NODE_OPTIONS))
 
 /**
- * Read environment variables from file.
- * https://github.com/motdotla/dotenv
- */
-// require('dotenv').config();
-
-/**
  * @see https://playwright.dev/docs/test-configuration
  */
 module.exports = defineConfig(
@@ -35,7 +29,7 @@ module.exports = defineConfig(
             trace: 'on-first-retry',
             headless: !isWebstormDebugMode,
         },
-        timeout: process.env.CI ? 30000 : 30000,
+        timeout: process.env.CI ? 20000 : 30000,
         expect: {
             timeout: process.env.CI ? 5000 : 5000,
         },
@@ -45,15 +39,15 @@ module.exports = defineConfig(
                 name: 'chromium',
                 use: { ...devices['Desktop Chrome'] },
             },
-            /*        {
-            name: 'firefox',
-            use: { ...devices['Desktop Firefox'] },
-        },
+            {
+                name: 'firefox',
+                use: { ...devices['Desktop Firefox'] },
+            },
 
-        {
-            name: 'webkit',
-            use: { ...devices['Desktop Safari'] },
-        },*/
+            {
+                name: 'webkit',
+                use: { ...devices['Desktop Safari'] },
+            },
         ],
     },
 )
