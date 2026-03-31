@@ -23,20 +23,3 @@ jobs:
         run: npx playwright install --with-deps
       - name: Run Playwright tests
         run: npx playwright test
-      - name: Build Allure report
-        if: always()
-        run: npx allure generate ./allure-results --clean -o ./allure-report
-      - name: Upload allure-results
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-            name: allure-results
-            path: 'allure-results'
-            retention-days: 7
-      - name: Upload allure-report (static)
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-            name: allure-report
-            path: allure-report
-            retention-days: 7
